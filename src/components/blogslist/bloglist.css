@@ -1,0 +1,10 @@
+.blog-list {
+    width: 100%;
+    margin-top: 3rem;
+}
+
+.blogcontainer {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}

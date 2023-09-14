@@ -1,0 +1,42 @@
+a {
+  font-weight: 500;
+  color: white;
+  text-decoration: inherit;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #042440;
+  box-sizing: border-box;
+  color: white;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+p {
+  margin: 0;
+}
+
+main {
+  width: 75%;
+  display: block;
+  margin: auto;
+}
+
+ul, li {
+  list-style: none;
+}
+
+hr{
+  width: 100%;
+}
+

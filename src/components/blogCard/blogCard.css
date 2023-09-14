@@ -1,0 +1,45 @@
+.blog-card {
+    width: 350px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-top img {
+    width: 100%;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.blog-buttom {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.blog-category {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-buttom h2 {
+    font-size: 20px;
+}
+.blog-buttom p {
+    font-size: 15px;
+    color: rgb(234, 230, 230);
+}
+
+.blog-profile {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.blog-profile img{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
