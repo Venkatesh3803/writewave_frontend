@@ -1,11 +1,12 @@
 import Homepage from './pages/homepage/homepage'
 import { Navigate, Route, Routes } from 'react-router-dom'
 import ProfilePage from './pages/profile/profilePage'
-import Blogpage from './pages/blogpage/blogpage'
+
 import LoginPage from './pages/loginPage/loginPage'
 import Register from './pages/register/Register'
 import Blogs from './pages/blogs/blogs'
 import { useSelector } from 'react-redux'
+import Blogpage from './pages/blogpage/blogpage'
 
 
 function App() {
