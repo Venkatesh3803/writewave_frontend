@@ -15,7 +15,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Homepage />} />
         <Route path='/singleblog/:id' element={<Blogpage />} />
-      
         <Route path='/profile/:id' element={<ProfilePage />} />
         <Route path='/login' element={user ? <Navigate to={"/"} /> : <LoginPage />} />
         <Route path='/register' element={<Register />} />
