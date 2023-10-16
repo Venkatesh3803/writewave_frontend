@@ -1,31 +1,63 @@
 import "./profile.css"
 import Bloglist from '../blogslist/bloglist'
+import BlogForm from "../BlogForm/BlogForm";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { publicRequest } from "../../requestMethods";
+import { AiOutlineEdit } from "react-icons/ai"
+import ProfileEdit from "./profileEdit";
+
+
 
 const Profile = () => {
+    const user = useSelector((state) => state.user.user)
+    const { id } = useParams()
+    const [currUser, setCurrUser] = useState("")
+    const [editMOde, setEditMode] = useState(false)
+    useEffect(() => {
+        const fetchingUser = async () => {
+            const res = await publicRequest.get(`/user/single/${id}`)
+            setCurrUser(res.data)
+        }
+        fetchingUser()
+    }, [id])
 
-    const user = true;
+
     return (
         <>
             <div className="profile">
                 <div className="profile-left">
                     <div className="profile-card">
-                        <img src="https://images.pexels.com/photos/18093135/pexels-photo-18093135/free-photo-of-a-person-wearing-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                        {user._id === currUser._id &&
+                            <AiOutlineEdit className="edit" onClick={() => setEditMode(true)} />
+                        }
+                        <img src={currUser.profilePic ? currUser.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
 
                         <div className="profile-card-info">
                             <div className="username">
                                 <h4>UserName :-</h4>
-                                <p>jhon Batia</p>
+                                <p>{currUser.username}</p>
                             </div>
                             <div className="username">
                                 <h4>Email :-</h4>
-                                <p>jhonBatia@gmail.com</p>
+                                <p>{currUser.email}</p>
                             </div>
                             <div className="username">
-                                <h4>Location :-</h4>
-                                <p>Mumbai</p>
+                                <h4>LivesIn :-</h4>
+                                <p>{currUser.livesIn ? currUser.livesIn : "City"}</p>
                             </div>
+                            <div className="username">
+                                <h4>Gender :-</h4>
+                                <p>{currUser.gender ? currUser.gender : "Gender"}</p>
+                            </div>
+                            <div className="username">
+                                <h4>Status :-</h4>
+                                <p>{currUser.status ? currUser.status : "Status"}</p>
+                            </div>
+
                             <hr />
-                            <div className="followings-box">
+                            {/* <div className="followings-box">
                                 <div className="followings">
                                     <h4>Following </h4>
                                     <p>50</p>
@@ -36,55 +68,24 @@ const Profile = () => {
                                     <p>205</p>
                                 </div>
                             </div>
-                            <hr />
+                            <hr /> */}
                         </div>
                         <button>Follow</button>
                     </div>
-                </div>
-                {user &&
 
+
+                </div>
+                {editMOde && <ProfileEdit setEditMode={setEditMode} currUser={currUser} setCurrUser={setCurrUser} />}
+
+                {user._id === id ?
                     <div className="profile-right">
                         <h2 style={{ textAlign: "center" }}>Add post</h2>
-                        <form action="">
-                            <div className="add-inputs">
-                                <label htmlFor="">Title :-</label>
-                                <input type="text" name="" id="" placeholder="Title" />
-                            </div>
-                            <div className="add-inputs">
-                                <label htmlFor="">image :-</label>
-                                <input type="file" name="" id="" placeholder="Title" />
-                            </div>
-                            <div className="add-inputs">
-                                <label htmlFor="">Catergory :-</label>
-                                <select name="" id="">
-                                    <option value="">options</option>
-                                    <option value="">Sports</option>
-                                    <option value="">Technology</option>
-                                    <option value="">News</option>
-                                    <option value="">Food</option>
-                                    <option value="">Travel</option>
-                                    <option value="">busniess</option>
-                                </select>
-                            </div>
-                            <div className="add-inputs">
-                                <label htmlFor="">Short Desc :-</label>
-                                <input type="text" name="" id="" placeholder="Short description" />
-                            </div>
-                            <div className="add-inputs">
-                                <label htmlFor=""> Description :-</label>
-                                <textarea cols={80} rows={14} />
-                            </div>
-                            <button>post</button>
-                        </form>
-
+                        <BlogForm />
                     </div>
-                }
+                    : ""}
+
             </div>
-
-
-
-
-            <Bloglist />
+            <Bloglist profilePage paramsId={id} />
         </>
     )
 }

@@ -38,3 +38,10 @@
 .footer-list li {
     cursor: pointer;
 }
+
+
+@media screen and (max-width: 780px) {
+    .footer-left p {
+        display: none;
+    }
+}

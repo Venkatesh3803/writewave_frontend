@@ -46,13 +46,17 @@ export const authSlice = createSlice({
       }
       localStorage.setItem("user", JSON.stringify(action.payload))
     },
+
+
     loginFail: (state) => {
       state.error = true;
       state.sucess = false;
       state.isLoading = false;
       state.user = ""
     },
-    logOut: (state) => {
+
+
+    logOut: (state, _action) => {
       state.user = "";
       state.error = false;
       state.isLoading = false

@@ -50,4 +50,65 @@
     flex-direction: column;
     font-size: 22px;
     gap: 1.5rem;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.dots {
+    position: absolute;
+    right: 5px;
+    top: -1.8rem;
+    cursor: pointer;
+}
+
+.edit-slide {
+    background-color: rgb(42, 201, 201);
+    padding: 0.8rem 2rem;
+    color: black;
+    font-size: 15px;
+    font-weight: 600;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+
+.edit-slide li {
+    cursor: pointer;
+}
+
+.single-blog-middle input {
+    background-color: transparent;
+    color: white;
+    width: 100%;
+}
+
+.single-blog-middle input:nth-child(1) {
+    font-size: 40px;
+}
+
+.single-blog-middle input:nth-child(2) {
+    font-size: 25px;
+}
+
+.edit-btn {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.edit-btn button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    background-color: rgb(240, 205, 133);
+}
+
+@media screen and (max-width: 780px) {
+    
 }

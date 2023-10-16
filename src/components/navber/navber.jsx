@@ -3,15 +3,25 @@ import search from "../../assets/search.png"
 import { Link } from "react-router-dom"
 import userImg from "../../assets/user.png"
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { logOut } from "../../redux/authReducer"
 const Navber = () => {
-    const user = useSelector((state) => state.user.user)
 
+    const user = JSON.parse(localStorage.getItem("user"))
     const [menu, setMenu] = useState(false)
+    const dispatch = useDispatch()
+
+    const handleLogout = () => {
+        dispatch(logOut())
+        setMenu(false)
+    }
+
     return (
         <nav>
             <div className="nav-left">
-                <div className="logo">WriteWave</div>
+                <Link to={"/"}>
+                    <div className="logo">WriteWave</div>
+                </Link>
                 <ul>
                     <li>
                         <Link to={"/"}>
@@ -47,24 +57,22 @@ const Navber = () => {
                     <div className="menu" >
 
                         <li>
-                            <Link to={"/profile"} style={{ color: "black" }}>
+                            <Link to={`/profile/${user?._id}`} style={{ color: "black" }}>
                                 Add Post
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/profile"} style={{ color: "black" }}>
+                            <Link to={`/profile/${user?._id}`} style={{ color: "black" }}>
                                 Profile
                             </Link>
                         </li>
                         <li>
-                            <Link to={"/"} style={{ color: "black" }}>
-                                Setting
+                            <Link to={"/profile"} style={{ color: "black" }}>
+                                Settings
                             </Link>
                         </li>
-                        <li>
-                            <Link to={"/"} style={{ color: "black" }}>
-                                LogOut
-                            </Link>
+                        <li onClick={handleLogout}>
+                            LogOut
                         </li>
 
                     </div>

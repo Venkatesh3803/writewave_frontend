@@ -1,14 +1,16 @@
 import { useState } from "react"
 import "./register.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { register } from "../../requestMethods"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
 
-const Register = () => {
-    let err = false
-    const dispatch = useDispatch()
 
+const Register = () => {
+    const dispatch = useDispatch()
+    const err = useSelector((state) => state.user.error)
+    const sucess = useSelector((state) => state.user.sucess)
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
@@ -27,9 +29,12 @@ const Register = () => {
         if (password !== confirmPassword) {
             return toast.warn("Password Din't Match")
         }
-        console.log("submited")
         register(dispatch, { email, password, username })
         reset()
+
+        if (sucess) {
+            navigate("/login")
+        }
     }
 
     return (
@@ -53,7 +58,7 @@ const Register = () => {
                         <input type="password" name="" id="confirmPass" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
 
-                    {err && <p className="err">Invaild Credentials</p>}
+                    {err && <p className="err">This Email is Already taken try with Differnt Email</p>}
                     <span>
                         <Link to={"/login"}>
                             Already have Account ! Login In

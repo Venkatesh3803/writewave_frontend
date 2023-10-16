@@ -1,15 +1,15 @@
 import { useState } from "react"
 import "./loginPage.css"
-import { Link } from "react-router-dom"
-import { useDispatch } from "react-redux"
+import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../requestMethods"
 
 
 const LoginPage = () => {
-    const err = false
     const dispatch = useDispatch()
-
-
+    const err = useSelector((state) => state.user.error)
+    const sucess = useSelector((state) => state.user.sucess)
+    const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -23,7 +23,9 @@ const LoginPage = () => {
         console.log("submited")
         login(dispatch, { email, password })
         reset()
-   
+        if (sucess) {
+            navigate("/")
+        }
     }
 
     return (
@@ -36,7 +38,7 @@ const LoginPage = () => {
                     </div>
                     <div className="inputs">
                         <label htmlFor="password">Password :-</label>
-                        <input type="password" name="" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     {err && <p className="err">Invaild Credentials</p>}
                     <span>

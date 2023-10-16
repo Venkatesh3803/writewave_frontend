@@ -4,6 +4,10 @@ nav {
     justify-content: space-between;
     width: 100%;
     padding: 0.5rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: #042440;
 }
 
 .nav-left {
@@ -76,7 +80,7 @@ nav {
     padding: 1.5rem;
     right: 10px;
     width: 180px;
-
+    z-index: 50;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
@@ -88,4 +92,23 @@ nav {
     border-bottom: 1px solid gray;
     padding-bottom: 0.5rem;
 
+}
+
+@media screen and (max-width: 780px) {
+    .nav-right{
+        gap: 0.5rem;
+    }
+    .search{
+        display: none;
+    }
+
+    .nav-left .logo{
+        font-size: 22px;
+    }
+    .nav-left ul {
+        display: flex;
+        gap: 0.3rem;
+        font-size: 12px;
+    }
+    
 }

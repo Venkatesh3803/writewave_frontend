@@ -33,6 +33,17 @@
     font-size: large;
 }
 
+@media screen and (max-width:780px) {
+    .register-container{
+        width: 60%;
+    }
+}
+@media screen and (max-width:480px) {
+    .register-container{
+        width: 90%;
+    }
+}
+
 
 .register-container span {
     text-align: center;

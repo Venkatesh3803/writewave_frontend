@@ -40,3 +40,8 @@ hr{
   width: 100%;
 }
 
+@media screen and (max-width: 780px) {
+  main{
+    width: 95%;
+  }
+}

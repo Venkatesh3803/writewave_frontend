@@ -20,7 +20,7 @@ const Hero = () => {
                 loop={Infinity}
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true }}
-               
+
             >
 
                 <SwiperSlide>
@@ -30,12 +30,16 @@ const Hero = () => {
                 <SwiperSlide>
                     <SlideContent />
                 </SwiperSlide>
+
                 <SwiperSlide>
                     <SlideContent />
                 </SwiperSlide>
+
+
                 <SwiperSlide>
                     <SlideContent />
                 </SwiperSlide>
+                
                 <SwiperSlide>
                     <SlideContent />
                 </SwiperSlide>

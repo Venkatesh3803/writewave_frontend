@@ -1,65 +1,65 @@
+import { useEffect, useState } from "react"
 import "./comments.css"
+import { publicRequest, userRequest } from "../../requestMethods"
+import { useParams, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
+import { toast } from "react-toastify"
+import CommentMessages from "./commentMessages"
+
 
 const Comments = () => {
+    const user = useSelector(state => state.user.user)
+    const { id } = useParams()
+    const navigate = useNavigate()
+    const [comm, setComm] = useState([])
+    const [text, setText] = useState("")
+
+    useEffect(() => {
+        const fetchingCommenents = async () => {
+            const res = await publicRequest.get(`/comment/${id}`)
+
+            setComm(res.data)
+        }
+        fetchingCommenents()
+    }, [id])
+
+    const handlePostComment = async () => {
+        if (!user) {
+            navigate("/login")
+            return
+        }
+        const newComment = {
+            userId: user._id,
+            postId: id,
+            comment: text,
+        }
+
+        try {
+            const res = await userRequest.post(`/comment`, newComment)
+            setComm([...comm, res.data])
+            toast.success("Commented sucessfully")
+            setText("")
+        } catch (error) {
+            return toast.error("opps something went wrong ")
+        }
+    }
+
+
     return (
         <div className='comments'>
             <h2>Comments</h2>
             <div className="comments-input">
-                <input type="text" name="" id="" placeholder='Comment' />
-                <button>Comment</button>
+                <input type="text" placeholder='Comment' value={text} onChange={(e) => setText(e.target.value)} />
+                <button onClick={handlePostComment}>Comment</button>
             </div>
             <div className="comment-box">
                 <div className="user-comment">
-                    <div className="user-comment-profile">
-                        <div className="user-comment-profile-img">
-                            <img src="https://images.pexels.com/photos/18093135/pexels-photo-18093135/free-photo-of-a-person-wearing-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                        </div>
-                        <div className="user-comment-info">
-                            <h4>Jhon</h4>
-                            <span>July 8, 2023</span>
-                        </div>
-                        <div className="comment-text">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem culpa deleniti vel! Error sunt, eius veritatis est aspernatur sint eos temporibus eaque at, fuga nulla pariatur veniam ducimus, nisi nesciunt?</p>
-                        </div>
-                    </div>
-                    <div className="user-comment-profile">
-                        <div className="user-comment-profile-img">
-                            <img src="https://images.pexels.com/photos/18093135/pexels-photo-18093135/free-photo-of-a-person-wearing-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                        </div>
-                        <div className="user-comment-info">
-                            <h4>Jhon</h4>
-                            <span>July 8, 2023</span>
-                        </div>
-                        <div className="comment-text">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem culpa deleniti vel! Error sunt, eius veritatis est aspernatur sint eos temporibus eaque at, fuga nulla pariatur veniam ducimus, nisi nesciunt?</p>
-                        </div>
-                    </div>
-                    <div className="user-comment-profile">
-                        <div className="user-comment-profile-img">
-                            <img src="https://images.pexels.com/photos/18093135/pexels-photo-18093135/free-photo-of-a-person-wearing-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                        </div>
-                        <div className="user-comment-info">
-                            <h4>Jhon</h4>
-                            <span>July 8, 2023</span>
-                        </div>
-                        <div className="comment-text">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem culpa deleniti vel! Error sunt, eius veritatis est aspernatur sint eos temporibus eaque at, fuga nulla pariatur veniam ducimus, nisi nesciunt?</p>
-                        </div>
-                    </div>
-                    <div className="user-comment-profile">
-                        <div className="user-comment-profile-img">
-                            <img src="https://images.pexels.com/photos/18093135/pexels-photo-18093135/free-photo-of-a-person-wearing-sunglasses.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                        </div>
-                        <div className="user-comment-info">
-                            <h4>Jhon</h4>
-                            <span>July 8, 2023</span>
-                        </div>
-                        <div className="comment-text">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem culpa deleniti vel! Error sunt, eius veritatis est aspernatur sint eos temporibus eaque at, fuga nulla pariatur veniam ducimus, nisi nesciunt?</p>
-                        </div>
-                    </div>
-
-
+                  
+                    {comm.map((c) => {
+                        return (
+                            <CommentMessages key={c._id} data={c} />
+                        )
+                    })}
                 </div>
             </div>
         </div>
