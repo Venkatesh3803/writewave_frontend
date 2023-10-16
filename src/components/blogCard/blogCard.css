@@ -26,6 +26,7 @@
 .blog-buttom h2 {
     font-size: 20px;
 }
+
 .blog-buttom p {
     font-size: 15px;
     color: rgb(234, 230, 230);
@@ -37,9 +38,21 @@
     align-items: center;
 }
 
-.blog-profile img{
+.blog-profile img {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+@media screen and (max-width:780px) {
+    .blog-card {
+        width: 210px;
+    }
+}
+
+@media screen and (max-width:480px) {
+    .blog-card {
+        width: 100%;
+    }
 }

@@ -13,8 +13,9 @@
 
 .comments-input input {
     width: 100%;
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
     border-radius: 8px;
+
 }
 
 .comments-input button {
@@ -80,4 +81,11 @@
     justify-content: space-between;
     align-items: center;
     flex: 22;
+}
+
+
+@media screen and (max-width:780px) {
+    .user-comment-info {
+        display: none;
+    }
 }

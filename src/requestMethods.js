@@ -1,8 +1,10 @@
 import axios from "axios";
 import { RegisterFail, RegisterStarts, RegisterSucessFull, loginFail, loginStarts, loginSucessFull } from "./redux/authReducer";
 
+
+// const BASE_URL = "http://localhost:8800/api"
 const BASE_URL = "https://writewavebackend.onrender.com/api"
-// export const PublicFoilder = " http://localhost:8800/images/" 
+
 
 const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
 const TOKEN = user.token

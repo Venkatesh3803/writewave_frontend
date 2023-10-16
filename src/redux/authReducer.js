@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify';
 
 
+
 const initialState = {
   user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "",
+  token: localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : "",
   sucess: false,
   error: false,
   isLoading: false,
@@ -24,18 +26,25 @@ export const authSlice = createSlice({
       state.error = false
       if (action.payload) {
         toast.success("Registerd SuccessFully")
+
       }
     },
+
+
     RegisterFail: (state) => {
       state.error = true;
+      state.sucess = false;
+      state.isLoading = false;
       state.user = ""
     },
 
     loginStarts: (state) => {
       state.isLoading = true;
     },
+
     loginSucessFull: (state, action) => {
       state.user = action.payload;
+      state.token = action.payload.token;
       state.sucess = true;
       state.isLoading = false;
       state.error = false;
@@ -45,6 +54,7 @@ export const authSlice = createSlice({
           { position: "bottom-center" })
       }
       localStorage.setItem("user", JSON.stringify(action.payload))
+      localStorage.setItem("token", JSON.stringify(action.payload.token))
     },
 
 

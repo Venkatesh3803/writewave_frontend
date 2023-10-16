@@ -44,7 +44,8 @@ const ProfileEdit = ({ setEditMode, currUser, setCurrUser }) => {
             profilePic: image,
             gender: currUser.gender,
             livesIn: currUser.livesIn,
-            status: currUser.status
+            status: currUser.status,
+            profression: currUser.profression
         }
 
 
@@ -86,6 +87,10 @@ const ProfileEdit = ({ setEditMode, currUser, setCurrUser }) => {
                     <div className="inputs">
                         <label htmlFor="">Status:-</label>
                         <input type="text" placeholder="Status" name="status" value={currUser.status} onChange={handleChange} />
+                    </div>
+                    <div className="inputs">
+                        <label htmlFor="">Profression:-</label>
+                        <input type="text" placeholder="profression" name="profression" value={currUser.profression} onChange={handleChange} />
                     </div>
                     <div className="inputs">
                         <label htmlFor="">ProfilePic:-</label>

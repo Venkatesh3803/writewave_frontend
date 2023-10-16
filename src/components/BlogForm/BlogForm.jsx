@@ -14,7 +14,7 @@ const BlogForm = () => {
         setInputs(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
     }
 
-    const handleImage = async(e) => {
+    const handleImage = async (e) => {
         const file = e.target.files[0];
         if (file) {
             try {
@@ -35,7 +35,6 @@ const BlogForm = () => {
         }
     }
 
-    console.log(image)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -80,6 +79,7 @@ const BlogForm = () => {
                         <option value="technology">Technology</option>
                         <option value="health">Health</option>
                         <option value="food">Food</option>
+                        <option value="entertainment">Entertainment</option>
                         <option value="news">News</option>
                         <option value="busniess">busniess</option>
                     </select>

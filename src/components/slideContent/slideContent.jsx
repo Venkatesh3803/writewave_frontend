@@ -1,25 +1,45 @@
+import moment from "moment"
 import "./slideContent.css"
+import { useEffect, useState } from "react"
+import { publicRequest } from "../../requestMethods"
+import { Link } from "react-router-dom"
 
-const SlideContent = () => {
+const SlideContent = ({ data }) => {
+    const [currUser, setCurrUser] = useState("")
+    useEffect(() => {
+        const fetchingCurrUser = async () => {
+            const res = await publicRequest.get(`/user/single/${data?.userId}`)
+            setCurrUser(res.data)
+        }
+        fetchingCurrUser()
+    }, [data?.userId])
+
+
+
     return (
         <div className='slider-card'>
             <div className="slider-img">
-                <img src="https://images.pexels.com/photos/18129270/pexels-photo-18129270/free-photo-of-neushwanstein-castle-on-a-cloudy-day.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                <img src={data?.image ? data.image : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
             </div>
             <div className="slider-info">
                 <div className="slider-category">
-                    <h4>Travel -</h4>
-                    <span>july 2, 2023</span>
+                    <h4>{data.category} -</h4>
+                    <span>{moment(data.createdAt).format("MMM Do YY")}</span>
                 </div>
-                <h1>Your most unhappy customers are your greatest source of learning.</h1>
-                <p>mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean</p>
+                <h1>{data.title}</h1>
+                <p>{data.shortDesc}</p>
                 <div className="slider-profile">
+
                     <div className="profile-img">
-                        <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                        <Link to={`/profile/${data.userId}`}>
+                        <img src={currUser?.profilePic ? currUser.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
+                        </Link>
                     </div>
                     <div className="profile-name">
-                        <h3>venkatesh</h3>
-                        <span>Software</span>
+                        <Link to={`/profile/${data.userId}`}>
+                            <h3>{currUser.username}</h3>
+                        </Link>
+                        <span>{currUser.profression}</span>
                     </div>
 
                 </div>

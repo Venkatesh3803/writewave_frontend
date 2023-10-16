@@ -34,11 +34,11 @@ const LoginPage = () => {
                 <form action="" onSubmit={handleSubmit}>
                     <div className="inputs">
                         <label htmlFor="email">Email :-</label>
-                        <input type="email" name="" id="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <input type="email" name="" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="inputs">
                         <label htmlFor="password">Password :-</label>
-                        <input type="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     {err && <p className="err">Invaild Credentials</p>}
                     <span>

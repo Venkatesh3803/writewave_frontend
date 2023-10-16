@@ -10,7 +10,7 @@
 }
 
 .category {
-    padding: 3rem 0;
+    padding: 2rem 0;
     width: 100%;
     display: flex;
     gap: 1.5rem;
@@ -19,7 +19,7 @@
 
 .category-card {
     border: 1px solid rgb(183, 180, 180);
-    width: 25%;
+    width: 100px;
     padding: 1.5rem;
     display: flex;
     align-items: center;
@@ -28,4 +28,29 @@
     cursor: pointer;
     font-weight: 500;
     font-size: 18px;
+}
+
+
+@media screen and (max-width:780px) {
+    .category-card {
+        font-size: 16px;
+        width: 10%;
+        padding: 1rem;
+    }
+
+    .category {
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width:520px) {
+    .category {
+        gap: 1rem;
+    }
+
+    .category-card {
+        font-size: 10px;
+        width: 8%;
+        padding: 1rem;
+    }
 }

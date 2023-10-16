@@ -8,8 +8,8 @@ import { toast } from "react-toastify"
 
 const Register = () => {
     const dispatch = useDispatch()
-    const err = useSelector((state) => state.user.error)
-    const sucess = useSelector((state) => state.user.sucess)
+    const { error, sucess } = useSelector((state) => state.user)
+
     const navigate = useNavigate()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -32,7 +32,7 @@ const Register = () => {
         register(dispatch, { email, password, username })
         reset()
 
-        if (sucess) {
+        if (sucess === true) {
             navigate("/login")
         }
     }
@@ -43,22 +43,22 @@ const Register = () => {
                 <form action="" onSubmit={handleSubmit}>
                     <div className="inputs">
                         <label htmlFor="email">Email :-</label>
-                        <input type="email" name="" id="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <input type="email" value={email} id="email" placeholder="Email" required onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="inputs">
                         <label htmlFor="username">Username :-</label>
-                        <input type="text" name="" id="username" placeholder="User name" onChange={(e) => setUsername(e.target.value)} />
+                        <input type="text"value={username} id="username" placeholder="User name" required onChange={(e) => setUsername(e.target.value)} />
                     </div>
                     <div className="inputs">
                         <label htmlFor="password">Password :-</label>
-                        <input type="password" name="" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password"value={password} id="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <div className="inputs">
                         <label htmlFor="confirmPass">Confirm Pass :-</label>
-                        <input type="password" name="" id="confirmPass" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
+                        <input type="password" value={confirmPassword} id="confirmPass" placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} />
                     </div>
 
-                    {err && <p className="err">This Email is Already taken try with Differnt Email</p>}
+                    {error && <p className="err">This Email is Already taken try with Differnt Email</p>}
                     <span>
                         <Link to={"/login"}>
                             Already have Account ! Login In

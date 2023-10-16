@@ -15,6 +15,7 @@ const Profile = () => {
     const { id } = useParams()
     const [currUser, setCurrUser] = useState("")
     const [editMOde, setEditMode] = useState(false)
+
     useEffect(() => {
         const fetchingUser = async () => {
             const res = await publicRequest.get(`/user/single/${id}`)
@@ -32,7 +33,7 @@ const Profile = () => {
                         {user._id === currUser._id &&
                             <AiOutlineEdit className="edit" onClick={() => setEditMode(true)} />
                         }
-                        <img src={currUser.profilePic ? currUser.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
+                        <img src={currUser?.profilePic ? currUser?.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
 
                         <div className="profile-card-info">
                             <div className="username">
@@ -55,6 +56,10 @@ const Profile = () => {
                                 <h4>Status :-</h4>
                                 <p>{currUser.status ? currUser.status : "Status"}</p>
                             </div>
+                            <div className="username">
+                                <h4>profression :-</h4>
+                                <p>{currUser.status ? currUser.profression : "Profression"}</p>
+                            </div>
 
                             <hr />
                             {/* <div className="followings-box">
@@ -70,7 +75,7 @@ const Profile = () => {
                             </div>
                             <hr /> */}
                         </div>
-                        <button>Follow</button>
+                        {/* <button>Follow</button> */}
                     </div>
 
 
