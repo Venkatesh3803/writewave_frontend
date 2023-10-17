@@ -19,20 +19,24 @@ const SlideContent = ({ data }) => {
     return (
         <div className='slider-card'>
             <div className="slider-img">
-                <img src={data?.image ? data.image : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
+                <Link to={`/singleblog/${data._id}`}>
+                    <img src={data?.image ? data.image : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
+                </Link>
             </div>
             <div className="slider-info">
                 <div className="slider-category">
                     <h4>{data.category} -</h4>
                     <span>{moment(data.createdAt).format("MMM Do YY")}</span>
                 </div>
-                <h1>{data.title}</h1>
+                <Link to={`/singleblog/${data._id}`}>
+                    <h1>{data.title}</h1>
+                </Link>
                 <p>{data.shortDesc}</p>
                 <div className="slider-profile">
 
                     <div className="profile-img">
                         <Link to={`/profile/${data.userId}`}>
-                        <img src={currUser?.profilePic ? currUser.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
+                            <img src={currUser?.profilePic ? currUser.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
                         </Link>
                     </div>
                     <div className="profile-name">
