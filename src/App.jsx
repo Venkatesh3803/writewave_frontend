@@ -4,7 +4,7 @@ import ProfilePage from './pages/profile/profilePage'
 import LoginPage from './pages/loginPage/loginPage'
 import Register from './pages/register/Register'
 import { useSelector } from 'react-redux'
-import Blogpage from './pages/blogpage/blogpage'
+// import Blogpage from './pages/blogpage/blogpage'
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
     <div className=''>
       <Routes>
         <Route path='/' element={<Homepage />} />
-        <Route path='/singleblog/:id' element={<Blogpage />} />
+        {/* <Route path='/singleblog/:id' element={<Blogpage />} /> */}
         <Route path='/profile/:id' element={<ProfilePage />} />
         <Route path='/login' element={user ? <Navigate to={"/"} /> : <LoginPage />} />
         <Route path='/register' element={<Register />} />
