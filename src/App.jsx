@@ -6,6 +6,8 @@ import Register from './pages/register/Register'
 import { useSelector } from 'react-redux'
 import SingleBlog from './pages/singleBlogPage/SingleBlogPage'
 import SingleBlogPage from './pages/singleBlogPage/SingleBlogPage'
+import AboutPage from './pages/aboutpage/AboutPage'
+import ContactPage from './pages/ContactPage/ContactPage'
 
 
 
@@ -20,6 +22,8 @@ function App() {
         <Route path='/login' element={user ? <Navigate to={"/"} /> : <LoginPage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/singleblog/:id' element={<SingleBlogPage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/contact' element={<ContactPage />} />
       </Routes>
     </div>
   )

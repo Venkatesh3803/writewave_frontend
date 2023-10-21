@@ -55,6 +55,12 @@
     margin-top: 2rem;
 }
 
+.content .paragraph{
+display: flex;
+flex-direction: column;
+gap: 0.8rem;
+}
+
 .dots {
     position: absolute;
     right: 5px;

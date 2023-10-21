@@ -94,7 +94,7 @@ const SingleBlog = ({ blog, setBlog }) => {
             <div className="single-blog-container">
                 <div className="single-blog-top">
                     <Link to={`../profile/${currUser?._id}`}>
-                        <img src={currUser?.profilePic ? currUser.profilePic :"https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
+                        <img src={currUser?.profilePic ? currUser.profilePic : "https://www.freeiconspng.com/uploads/no-image-icon-11.PNG"} alt="" />
                     </Link>
                     <Link to={`../profile/${currUser?._id}`}>
                         <h3>{currUser?.username}</h3>
@@ -117,7 +117,16 @@ const SingleBlog = ({ blog, setBlog }) => {
                                 <li onClick={handleDelete}>Delete</li>
                             </div>
                         }
-                        {editMode ? <textarea cols={10} rows={15} name="desc" value={blog?.desc} onChange={handleChange} /> : <p>{blog?.desc}</p>}
+                        {editMode ? <textarea cols={10} rows={15} name="desc" value={blog?.desc} onChange={handleChange} /> :
+                            <div className="paragraph">
+                                {blog?.desc?.split("\n").map((p, i) => {
+                                    return (
+                                        <p key={i}>{p}</p>
+                                    )
+                                })}
+                            </div>
+                        }
+
                         {editMode && <div className="edit-btn">
                             <button onClick={handleUpdate}>Update</button>
                             <button onClick={() => setEditMode(false)}>Cancel</button>

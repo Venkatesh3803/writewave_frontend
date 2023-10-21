@@ -1,0 +1,23 @@
+.blogpage {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 80%;
+    margin: auto;
+    height: 80vh;
+    font-size: larger;
+}
+
+
+@media screen and (max-width:1080px) {
+    .blogpage{
+        height: auto;
+    }
+}
+@media screen and (max-width:480px) {
+    .blogpage{
+        height: auto;
+        width: 90%;
+        font-size: medium;
+    }
+}

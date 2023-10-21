@@ -1,12 +1,21 @@
 .blog-card {
-    width: 350px;
+    width: 300px;
+    max-width: 350px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-container{
+    width: fit-content;
     display: flex;
     flex-direction: column;
 }
 
 .blog-top img {
     width: 100%;
+    height: 40vh;
     border-radius: 8px;
     object-fit: contain;
 }
@@ -48,6 +57,7 @@
 @media screen and (max-width:780px) {
     .blog-card {
         width: 210px;
+        flex-grow: 1;
     }
 }
 

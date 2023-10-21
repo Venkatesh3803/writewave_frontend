@@ -29,10 +29,15 @@ const Navber = () => {
                         </Link>
                     </li>
                     <li>
-                        CONTACT
+
+                        <Link to={"/contact"}>
+                            Contact Us
+                        </Link>
                     </li>
                     <li>
-                        ABOUT
+                        <Link to={"/about"}>
+                            ABOUT
+                        </Link>
                     </li>
                 </ul>
 
