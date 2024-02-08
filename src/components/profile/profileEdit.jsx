@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./profile.css"
-import { userRequest } from "../../requestMethods"
+import { updateUser } from "../../requestMethods"
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -39,9 +39,12 @@ const ProfileEdit = ({ setEditMode, currUser, setCurrUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
+        const TOKEN = user.token
+
         let updatedUser = {
             username: currUser.username,
-            profilePic: image,
+            profilePic: image ? image : currUser.profilePic,
             gender: currUser.gender,
             livesIn: currUser.livesIn,
             status: currUser.status,
@@ -50,9 +53,10 @@ const ProfileEdit = ({ setEditMode, currUser, setCurrUser }) => {
 
 
         try {
-            const res = await userRequest.patch(`/user/${id}`, updatedUser)
-            toast.success(res.data)
-            setEditMode(false)
+            updateUser(`/user/${id}`, "patch", updatedUser, TOKEN).then((res) => {
+                toast.success(res)
+                setEditMode(false)
+            })
         } catch (error) {
             toast.error("UserName Already taken")
             return error.message

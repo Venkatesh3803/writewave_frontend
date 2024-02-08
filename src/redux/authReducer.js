@@ -71,6 +71,7 @@ export const authSlice = createSlice({
       state.error = false;
       state.isLoading = false
       localStorage.removeItem("user")
+      localStorage.removeItem("token")
 
       toast.success(
         "Logout",

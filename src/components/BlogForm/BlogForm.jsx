@@ -1,6 +1,6 @@
 import { useState } from "react"
 import "./BlogForm.css"
-import { userRequest } from "../../requestMethods"
+import { createBlog, userRequest } from "../../requestMethods"
 import { toast } from "react-toastify"
 import { useSelector } from "react-redux"
 import axios from "axios"
@@ -38,7 +38,7 @@ const BlogForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        const token = localStorage.getItem("token") && JSON.parse(localStorage.getItem("token"))
         //post data
         const newPost = {
             userId: user._id,
@@ -51,10 +51,12 @@ const BlogForm = () => {
 
 
         try {
-            let res = await userRequest.post("/post", newPost)
-            if (res.status == 201) {
-                toast.success("posted sucessfull")
-            }
+            if (token == null || undefined) return toast.warn("Session Expired Please Login Again")
+            createBlog("/post", "post", newPost, token).then((res) => {
+                if (res) {
+                    toast.success("posted sucessfull")
+                }
+            })
         } catch (error) {
             return error.message
         }
@@ -65,15 +67,15 @@ const BlogForm = () => {
             <form action="" onSubmit={handleSubmit}>
                 <div className="add-inputs">
                     <label htmlFor="">Title :-</label>
-                    <input type="text" name="title" id="" placeholder="Title" onChange={handleChange} />
+                    <input type="text" name="title" id="" placeholder="Title" required onChange={handleChange} />
                 </div>
                 <div className="add-inputs">
                     <label htmlFor="">image :-</label>
-                    <input type="file" name="" id="" placeholder="Title" onChange={handleImage} />
+                    <input type="file" onChange={handleImage} />
                 </div>
                 <div className="add-inputs">
                     <label htmlFor="">Catergory :-</label>
-                    <select name="category" id="" onChange={handleChange}>
+                    <select name="category" id="" required onChange={handleChange}>
                         <option value="">options</option>
                         <option value="sports">Sports</option>
                         <option value="technology">Technology</option>
@@ -86,11 +88,11 @@ const BlogForm = () => {
                 </div>
                 <div className="add-inputs">
                     <label htmlFor="">Short Desc :-</label>
-                    <input type="text" name="shortDesc" id="" placeholder="Short description" onChange={handleChange} />
+                    <input type="text" name="shortDesc" required placeholder="Short description" onChange={handleChange} />
                 </div>
                 <div className="add-inputs">
                     <label htmlFor="desc"> Description :-</label>
-                    <textarea cols={80} name="desc" rows={14} onChange={handleChange} />
+                    <textarea cols={80} name="desc" required rows={14} onChange={handleChange} />
                 </div>
                 <button type="submit">post</button>
             </form>

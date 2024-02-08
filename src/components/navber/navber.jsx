@@ -2,19 +2,35 @@ import "./navber.css"
 import search from "../../assets/search.png"
 import { Link } from "react-router-dom"
 import userImg from "../../assets/user.png"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useDispatch } from "react-redux"
 import { logOut } from "../../redux/authReducer"
+import { useNavigate } from "react-router-dom"
+import { useDebounce } from 'use-debounce';
+import { InputSearch } from "../../contextApi/searchInputContext"
+
+
+
 const Navber = () => {
+    const onChange = useContext(InputSearch)
 
     const user = JSON.parse(localStorage.getItem("user"))
     const [menu, setMenu] = useState(false)
+    const [inputs, setInputs] = useState("")
     const dispatch = useDispatch()
+
+    const handleChange = (e) => {
+        setInputs(e.target.value)
+        dispatch(onChange({inputs}))
+    }
+  
 
     const handleLogout = () => {
         dispatch(logOut())
         setMenu(false)
     }
+
+
 
     return (
         <nav>
@@ -29,9 +45,8 @@ const Navber = () => {
                         </Link>
                     </li>
                     <li>
-
                         <Link to={"/contact"}>
-                            Contact Us
+                            CONTACT US
                         </Link>
                     </li>
                     <li>
@@ -44,7 +59,7 @@ const Navber = () => {
             </div>
             <div className="nav-right">
                 <div className="search">
-                    <input type="text" placeholder='Search here...' />
+                    <input type="text" placeholder='Search here...' onChange={handleChange} />
                     <img src={search} alt="" width={20} />
                 </div>
                 {user ?

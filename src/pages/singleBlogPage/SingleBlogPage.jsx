@@ -4,24 +4,28 @@ import Footer from '../../components/footer/footer'
 import SingleBlog from '../../components/singleblog/singleBlog'
 import { useParams } from "react-router-dom"
 
-import { publicRequest } from "../../requestMethods"
+import { fetchingSingleBlogs } from "../../requestMethods"
 
 const SingleBlogPage = () => {
     const { id } = useParams()
     const [blog, setBlog] = useState({})
     useEffect(() => {
-        const fetchingBlogs = async () => {
-            const res = await publicRequest.get(`/post/${id}`)
-            setBlog(res.data)
-        }
-        fetchingBlogs()
-    }, [])
+        fetchingSingleBlogs(`/post/${id}`, "get").then((res) => {
+            setBlog(res)
+        })
+    }, [id])
 
 
     return (
         <main>
             <Navber />
-            <SingleBlog blog={blog} setBlog={setBlog} id={id} />
+            {blog ?
+                <>
+                    <SingleBlog blog={blog} setBlog={setBlog} id={id} />
+                </>
+                :
+                <h1>Loading</h1>
+            }
             <Footer />
         </main>
     )

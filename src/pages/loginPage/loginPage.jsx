@@ -3,6 +3,7 @@ import "./loginPage.css"
 import { Link, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../requestMethods"
+import bg from "../../assets/registerbg.png"
 
 
 const LoginPage = () => {
@@ -20,7 +21,6 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("submited")
         login(dispatch, { email, password })
         reset()
         if (sucess) {
@@ -30,15 +30,17 @@ const LoginPage = () => {
 
     return (
         <div className='login'>
+            <img src={bg} alt="" />
             <div className="login-container">
                 <form action="" onSubmit={handleSubmit}>
+                    <h1>Login</h1>
                     <div className="inputs">
                         <label htmlFor="email">Email :-</label>
-                        <input type="email" name="" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type="email" name="" id="email" placeholder="Email" value={email} required onChange={(e) => setEmail(e.target.value)} />
                     </div>
                     <div className="inputs">
                         <label htmlFor="password">Password :-</label>
-                        <input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <input type="password" id="password" placeholder="Password" value={password} required onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     {err && <p className="err">Invaild Credentials</p>}
                     <span>

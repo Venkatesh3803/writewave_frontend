@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { register } from "../../requestMethods"
 import { useDispatch, useSelector } from "react-redux"
 import { toast } from "react-toastify"
+import bg from "../../assets/registerbg.png"
 
 
 const Register = () => {
@@ -39,7 +40,9 @@ const Register = () => {
 
     return (
         <div className='register'>
+            <img src={bg} alt="" />
             <div className="register-container">
+                <h1>Sign Up</h1>
                 <form action="" onSubmit={handleSubmit}>
                     <div className="inputs">
                         <label htmlFor="email">Email :-</label>

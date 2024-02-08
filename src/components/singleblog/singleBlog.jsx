@@ -1,6 +1,6 @@
 import Comments from "../comments/comments"
 import "./singleBlog.css"
-import { publicRequest, userRequest } from "../../requestMethods"
+import { deleteBlog, editBlog, fetchingUser, publicRequest, userRequest } from "../../requestMethods"
 import { useEffect, useState } from "react"
 import moment from "moment"
 import { Link, useParams, useNavigate } from "react-router-dom"
@@ -25,33 +25,34 @@ const SingleBlog = ({ blog, setBlog }) => {
         setEditMode(true);
         setDots(false)
     }
+
+    
     const handleChange = (e) => {
         setBlog(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
     }
 
     useEffect(() => {
-        const fetchingCurrUser = async () => {
-            const res = await publicRequest.get(`/user/single/${blog?.userId}`)
-            setCurrUser(res.data)
-        }
-        fetchingCurrUser()
+        fetchingUser(`/user/single/${blog?.userId}`, "get").then((res) => {
+            setCurrUser(res)
+        })
+
     }, [blog?.userId])
 
 
 
     const handleUpdate = async () => {
+        const token = localStorage.getItem("token") && JSON.parse(localStorage.getItem("token"))
         const updatedInfo = {
             title: blog.title,
             desc: blog.desc,
             shortDesc: blog.shortDesc,
         }
-
         try {
-            const res = await userRequest.patch(`/post/${id}`, {
-                updatedInfo
+            if (token == null || undefined) return toast.warn("Session Expired Please Login Again")
+            editBlog(`/post/${id}`, "patch", updatedInfo, token).then((res) => {
+                toast.success(res)
             })
 
-            toast.success(res.data)
         } catch (error) {
             return (error.message)
         }
@@ -60,18 +61,19 @@ const SingleBlog = ({ blog, setBlog }) => {
     }
 
     const handleDelete = async () => {
+        const token = localStorage.getItem("token") && JSON.parse(localStorage.getItem("token"))
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to do this.',
             buttons: [
                 {
                     label: 'Yes',
-                    onClick: async () => {
+                    onClick: () => {
                         try {
-                            const res = await userRequest.delete(`/post/${id}`)
-                            toast.success(res.data)
-                            navigate("/")
-
+                            deleteBlog(`/post/${id}`, "delete", token).then((res) => {
+                                toast.success(res.data)
+                                navigate("/")
+                            })
                         } catch (error) {
                             toast.error(error.message)
                         }

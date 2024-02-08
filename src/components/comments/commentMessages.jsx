@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { publicRequest } from '../../requestMethods'
+import {  fetchingUser } from '../../requestMethods'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 
 
 
 const CommentMessages = ({ data }) => {
     const [commUser, setCommUser] = useState({})
-    const user = useSelector((state) => state.user.user)
 
     useEffect(() => {
-        const fetchingCommUser = async () => {
-            const res = await publicRequest.get(`/user/single/${data?.userId}`)
-            setCommUser(res.data)
-        }
-        fetchingCommUser()
+        fetchingUser(`/user/single/${data?.userId}`, "get").then((res) => {
+            setCommUser(res)
+        })
+
     }, [])
 
     const handleClick = () => {

@@ -7,17 +7,16 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import SlideContent from "../slideContent/slideContent";
 import { useEffect, useState } from "react";
-import { publicRequest } from "../../requestMethods";
+import { fetchingBlogs, publicRequest } from "../../requestMethods";
 
 const Hero = () => {
     const [blog, setBlog] = useState([])
 
     useEffect(() => {
-        const fetchingBlogs = async () => {
-            const res = await publicRequest.get(`/post?category=health`)
-            setBlog(res.data)
-        }
-        fetchingBlogs()
+      fetchingBlogs(`/post?category=health`, "get").then((res)=>{
+        setBlog(res)
+      })
+        
     }, [])
 
 

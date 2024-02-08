@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
 import BlogCard from "../blogCard/blogCard"
 import "./bloglist.css"
-import { publicRequest } from "../../requestMethods"
+import { fetchingBlogs } from "../../requestMethods"
 
-const Bloglist = ({ paramsId, profilePage }) => {
+const Bloglist = ({ paramsId, profilePage, blogsPage }) => {
 
     const [blog, setBlog] = useState([])
     const [category, setCategory] = useState("")
@@ -61,18 +61,16 @@ const Bloglist = ({ paramsId, profilePage }) => {
 
 
     useEffect(() => {
-        const fetchingBlogs = async () => {
-            const res = await publicRequest.get(category ? `/post?category=${category}` : paramsId ? `/post?userId=${paramsId}` : "/post")
-            setBlog(res.data)
-        }
-        fetchingBlogs()
+        fetchingBlogs((category ? `/post?category=${category}` : paramsId ? `/post?userId=${paramsId}` : "/post"), "get").then((res) => {
+            setBlog(res)
+        })
     }, [category])
 
 
 
     return (
         <div className='blog-list'>
-            {!profilePage &&
+            {!profilePage && !blogsPage &&
                 <div className="category">
                     {categoryList.map(c => {
                         return (
@@ -85,7 +83,7 @@ const Bloglist = ({ paramsId, profilePage }) => {
                 </div>
             }
             <div className="blogcontainer">
-                {blog.map((b) => {
+                {blog?.map((b) => {
                     return (
                         <BlogCard key={b._id} data={b} />
                     )
