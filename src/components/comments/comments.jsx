@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import "./comments.css"
-import { fetchingComment, postComment, publicRequest, userRequest } from "../../requestMethods"
+import { fetchingComment, postComment } from "../../requestMethods"
 import { useParams, useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { toast } from "react-toastify"

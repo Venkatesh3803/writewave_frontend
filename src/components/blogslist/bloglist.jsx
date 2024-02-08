@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import BlogCard from "../blogCard/blogCard"
 import "./bloglist.css"
 import { fetchingBlogs } from "../../requestMethods"
+import { useSearchContext } from "../../contextApi/searchInputContext"
 
 const Bloglist = ({ paramsId, profilePage, blogsPage }) => {
-
+    const { search } = useSearchContext();
     const [blog, setBlog] = useState([])
     const [category, setCategory] = useState("")
 
@@ -61,10 +62,10 @@ const Bloglist = ({ paramsId, profilePage, blogsPage }) => {
 
 
     useEffect(() => {
-        fetchingBlogs((category ? `/post?category=${category}` : paramsId ? `/post?userId=${paramsId}` : "/post"), "get").then((res) => {
+        fetchingBlogs((category ? `/post?category=${category}` : paramsId ? `/post?userId=${paramsId}`: search ? `/post?search=${search}` : "/post"), "get").then((res) => {
             setBlog(res)
         })
-    }, [category])
+    }, [category, search])
 
 
 

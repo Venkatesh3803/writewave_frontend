@@ -94,21 +94,54 @@ nav {
 
 }
 
+.sidebar-icon {
+    display: none;
+}
+
+
+
 @media screen and (max-width: 780px) {
-    .nav-right{
+    .nav-right {
         gap: 0.5rem;
     }
-    .search{
+
+    .search {
         display: none;
     }
 
-    .nav-left .logo{
+    .nav-left .logo {
         font-size: 22px;
     }
+
     .nav-left ul {
         display: flex;
         gap: 0.3rem;
         font-size: 12px;
     }
-    
+
+    .nav-left ul {
+        display: none;
+    }
+
+    .sidebar-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 25px;
+    }
+
+    .sidebar {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1.5rem;
+        background-color: rgb(134, 134, 131);
+        position: absolute;
+        right:0 ;
+        top: 0;
+        width: 45%;
+        z-index: 2;
+        font-size: larger;
+        padding: 2rem ;
+        height: 100vh;
+    }
 }
