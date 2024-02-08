@@ -1,7 +1,7 @@
 import "./navber.css"
 import { Link } from "react-router-dom"
 import userImg from "../../assets/user.png"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { logOut } from "../../redux/authReducer"
 import { useSearchContext } from "../../contextApi/searchInputContext"
@@ -21,7 +21,6 @@ const Navber = () => {
 
     const handleChange = (e) => {
         setSearch(e.target.value)
-
     }
 
     const handleLogout = () => {
@@ -29,11 +28,7 @@ const Navber = () => {
         setMenu(false)
     }
 
-    useEffect(() => {
-        if (search.length > 2) {
-            navigate(`/blogs?search=${search}`)
-        }
-    }, [search])
+
 
 
 

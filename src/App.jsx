@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import SingleBlogPage from './pages/singleBlogPage/SingleBlogPage'
 import AboutPage from './pages/aboutpage/AboutPage'
 import ContactPage from './pages/ContactPage/ContactPage'
-import BlogsPage from './pages/blogsPage/BlogsPage'
+
 
 
 
@@ -24,7 +24,6 @@ function App() {
         <Route path='/singleblog/:id' element={<SingleBlogPage />} />
         <Route path='/about' element={<AboutPage />} />
         <Route path='/contact' element={<ContactPage />} />
-        <Route path='/blogs?' element={<BlogsPage />} />
       </Routes>
     </div>
   )

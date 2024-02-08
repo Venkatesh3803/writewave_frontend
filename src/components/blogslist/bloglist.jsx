@@ -62,7 +62,7 @@ const Bloglist = ({ paramsId, profilePage, blogsPage }) => {
 
 
     useEffect(() => {
-        fetchingBlogs((category ? `/post?category=${category}` : paramsId ? `/post?userId=${paramsId}`: search ? `/post?search=${search}` : "/post"), "get").then((res) => {
+        fetchingBlogs((category ? `/post?category=${category}` : paramsId ? `/post?userId=${paramsId}` : search ?`/post?search=${search}`  : "/post"), "get").then((res) => {
             setBlog(res)
         })
     }, [category, search])
