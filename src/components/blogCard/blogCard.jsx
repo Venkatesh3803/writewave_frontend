@@ -22,7 +22,7 @@ const BlogCard = ({ data }) => {
                     <Link to={`../singleblog/${data._id}`}>
                         <h2>{data.title}.</h2>
                     </Link>
-                    <p>{data.shortDesc.slice(0, 100)}...</p>
+                    <p>{data.shortDesc?.slice(0, 100)}...</p>
                     <Link to={`../singleblog/${data._id}`}>
                         <span style={{ textAlign: "end" }}>Read More...</span>
                     </Link>

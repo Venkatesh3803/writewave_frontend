@@ -7,7 +7,7 @@ const BASE_URL = "https://writewavebackend.onrender.com/api"
 
 
 const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
-const TOKEN = user.token
+const TOKEN = user?.token
 
 
 

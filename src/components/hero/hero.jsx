@@ -7,13 +7,13 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import SlideContent from "../slideContent/slideContent";
 import { useEffect, useState } from "react";
-import { fetchingBlogs, publicRequest } from "../../requestMethods";
+import { fetchingBlogs } from "../../requestMethods";
 
 const Hero = () => {
     const [blog, setBlog] = useState([])
 
     useEffect(() => {
-      fetchingBlogs(`/post?category=health`, "get").then((res)=>{
+      fetchingBlogs(`/post?category=Health`, "get").then((res)=>{
         setBlog(res)
       })
         
@@ -34,7 +34,7 @@ const Hero = () => {
                 scrollbar={{ draggable: true }}
 
             >
-                {blog.slice(0, 5).map((b) => {
+                {blog?.slice(0, 5).map((b) => {
                     return (
                         <SwiperSlide key={b._id}>
                             <SlideContent data={b} />

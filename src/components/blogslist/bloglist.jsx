@@ -19,43 +19,43 @@ const Bloglist = ({ paramsId, profilePage, blogsPage }) => {
         {
             id: 2,
             name: "Entertainment",
-            link: "entertainment",
+            link: "Entertainment",
             bg: "#ecc6eb"
         },
         {
             id: 3,
             name: "Food",
-            link: "food",
+            link: "Food",
             bg: "#ECC6C7"
         },
         {
             id: 4,
             name: "Health",
-            link: "health",
+            link: "Health",
             bg: "#ECE4C6"
         },
         {
             id: 5,
             name: "Technology",
-            link: "technology",
+            link: "Technology",
             bg: "#BFC1EC"
         },
         {
             id: 6,
             name: "Sports",
-            link: "sports",
+            link: "Sports",
             bg: "#ECBFE7"
         },
         {
             id: 7,
             name: "News",
-            link: "news",
+            link: "News",
             bg: "#C9ECBF"
         },
         {
             id: 8,
             name: "Business",
-            link: "business",
+            link: "Business",
             bg: "#BFEAEC"
         },
     ]
